@@ -5,6 +5,7 @@ export const clearInput = () => {
 };
 export const clearResult = () => {
     elements.searchResList.innerHTML = '';
+    elements.searchResPages.innerHTML = '';
 };
 const limitRecipeTitle = (title, limit = 17) => {
     const newTitle = [];
@@ -48,7 +49,7 @@ const createButton = (page, type) => `
 const renderButtons = (page, numResults, resPerPage) => {
     const pages = Math.ceil(numResults / resPerPage);
     let button;
-    if (page === pages > 1) {
+    if (page === 1 && pages > 1) {
         // only button to go to next page
         button = createButton(page, 'next');
     } else if (page < pages) {
