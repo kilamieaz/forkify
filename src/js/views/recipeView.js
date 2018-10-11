@@ -21,7 +21,7 @@ const formatCount = count => {
     return '?';
 };
 
-const createIngredient = ingredient => {`
+const createIngredient = ingredient => `
     <li class="recipe__item">
         <svg class="recipe__icon">
             <use href="img/icons.svg#icon-check"></use>
@@ -32,8 +32,7 @@ const createIngredient = ingredient => {`
             ${ingredient.ingredient}
         </div>
     </li>
-`
-};
+`;
 
 export const renderRecipe = recipe => {
     const markup = `

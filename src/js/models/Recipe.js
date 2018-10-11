@@ -85,7 +85,7 @@ export default class Recipe {
         this.ingredients = newIngredients;
     }
 
-    updateServings (type) {
+    updateServings(type) {
         // servings
         const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
         // ingredients
@@ -95,6 +95,6 @@ export default class Recipe {
             // 3x(2/4) = 1.5
             ing.count *= (newServings / this.servings);
         })
-        this.servings = new newServings;
+        this.servings =  newServings;
     }
 }
