@@ -1,6 +1,5 @@
 import { elements } from './base';
 
-
 export const renderItem = item => {
     const {id, count, unit, ingredient} = item ;
     const markup = `

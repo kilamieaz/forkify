@@ -6,8 +6,8 @@ import Likes from './models/Likes';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
+import * as likesView from './views/likesView';
 import { elements, renderLoader, clearLoader } from './views/base';
-import Likes from './models/Likes';
 /** Global state of the app
  * - search object 
  * - current recipe object
@@ -87,7 +87,10 @@ const controlRecipe = async () => {
             state.recipe.calcServings();
             // render recipe
             clearLoader();
-            recipeView.renderRecipe(state.recipe);
+            recipeView.renderRecipe(
+                state.recipe, 
+                state.likes.isLiked(id)
+            );
             // console.log(state.recipe);
         } catch (error) {
             alert('Error processing recipe!');
@@ -133,6 +136,8 @@ elements.shopping.addEventListener('click', e => {
 /**
  * Like controller
  */
+// Testing
+state.likes = new Likes();
 const controlLike = () => {
     if (!state.likes) state.likes = new Likes();
     const currentID = state.recipe.id;
@@ -146,6 +151,7 @@ const controlLike = () => {
             state.recipe.img,
         )
         // toggle the like button
+        likesView.toggleLikeBtn(true);
         // add like to UI list
         console.log(state.likes);
     // User Has liked current recipe
@@ -153,6 +159,7 @@ const controlLike = () => {
         // remove like from the state
         state.likes.deleteLike(currentID);
         // toggle the like button
+        likesView.toggleLikeBtn(false);
         // remove like from UI list
     }
 };
@@ -175,7 +182,7 @@ elements.recipe.addEventListener('click', e => {
     } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
         // Add ingredients to shopping list
         controlList();
-    } else if (e.target.matches('.recipe__love, recipe__love *')) {
+    } else if (e.target.matches('.recipe__love, .recipe__love *')) {
         // Like controller
         controlLike();
     }
